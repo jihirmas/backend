@@ -59,6 +59,7 @@ group :development do
 end
 
 gem "image_processing", "~> 1.2"
+gem "dotenv-rails"
 
 group :production do
   # Use PostgreSQL as the database for Active Record
