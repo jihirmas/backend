@@ -16,6 +16,8 @@ gem 'graphql'
 gem 'graphql-rails-resolver'
 
 gem 'puma', '~> 5.0'
+# cors
+gem 'rack-cors'
 
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
