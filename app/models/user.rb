@@ -23,11 +23,16 @@ class User < ApplicationRecord
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
-
+  # Asociaciones para amistad en User
+  
+  has_many :friendships
+  has_many :friends, through: :friendships
+  
   has_many :trips
   has_many :posts, through: :trips
   has_many :destinations, through: :posts
   has_many :users, through: :posts
+  has_many :invitations
 
 end
 

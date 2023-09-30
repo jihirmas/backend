@@ -17,7 +17,7 @@ gem 'graphql-rails-resolver'
 
 gem 'puma', '~> 5.0'
 # cors
-gem 'rack-cors'
+gem 'rack-cors', :require => 'rack/cors'
 
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -36,12 +36,11 @@ gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
-gem 'rack-cors', :require => 'rack/cors'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem "rack-cors"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -62,7 +61,8 @@ end
 
 gem "image_processing", "~> 1.2"
 gem "dotenv-rails"
-
+gem 'rqrcode'
+gem 'chunky_png'
 group :production do
   # Use PostgreSQL as the database for Active Record
   gem 'pg', '~> 1.3', '>= 1.3.5'
