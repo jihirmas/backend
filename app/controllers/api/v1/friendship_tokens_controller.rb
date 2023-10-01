@@ -56,8 +56,13 @@ class API::V1::FriendshipTokensController < APIController
         user_id_created = Invitation.where(token: recieved_token).pluck(:user_id)[0].to_i
         created_at = Invitation.where(token: recieved_token).pluck(:created_at)[0]
         coordinates = Invitation.where(token: recieved_token).pluck(:coordinates)[0]
-        print("LLEGOOO")
-        if user_id_created != user_id_accepted && (Time.now - created_at) < 60
+        print("LLEGOOO")+
+        print("NNNNNNNNNNNNNNNNNNNN")
+        print(Time.now)
+        print(created_at)
+        print(Time.now - created_at)
+        print("NNNNNNNNNNNNNNNNNNNN")
+        if (Time.now - created_at) < 60
             Friendship.create(:user_id => user_id_created, :friend_id => user_id_accepted, :gps_coordinates => coordinates)
             render :json => {'estado': "ok"}
         else 
