@@ -56,7 +56,7 @@ class API::V1::FriendshipTokensController < APIController
         user_id_created = Invitation.where(token: recieved_token).pluck(:user_id)[0].to_i
         created_at = Invitation.where(token: recieved_token).pluck(:created_at)[0]
         coordinates = Invitation.where(token: recieved_token).pluck(:coordinates)[0]
-        print("LLEGOOO")+
+        print("LLEGOOO")
         print("NNNNNNNNNNNNNNNNNNNN")
         print(Time.now)
         print(created_at)
