@@ -11,9 +11,9 @@ class API::V1::FriendshipTokensController < APIController
         longitud = pa['longitude']
         coordinates = "#{latitud},#{longitud}"
         print(coordinates)
-        #Invitation.create(:token => token, :user_id => id_usuario, :coordinates => coordinates)
+        Invitation.create(:token => token, :user_id => id_usuario, :coordinates => coordinates)
         #Invitation.where(token: tk).pluck(:created_at)[0]
-        base_url = 'http://localhost:3000/api/v1/friendship_tokens/show'
+        base_url = 'https://backend-production-ddd7.up.railway.app/api/v1/friendship_tokens/add'
         url_with_token = "#{base_url}?fndtk=#{token}"
 
         qrcode = RQRCode::QRCode.new(url_with_token)
@@ -41,4 +41,19 @@ class API::V1::FriendshipTokensController < APIController
         #send_data RQRCode::QRCode.new('http://localhost:3000/api/v1/friendship_tokens/show').as_png(size: 300), type: 'image/png', disposition: 'attachment'
     end
 
+    def add
+        pa = JSON.parse(request.raw_post)
+        user_id_accepted = pa['user_id'].to_i
+        recieved_token = pa['fndtk']
+        user_id_created = Invitation.where(token: recieved_token).pluck(:user_id)[0].to_i
+        created_at = Invitation.where(token: recieved_token).pluck(:created_at)[0]
+        coordinates = Invitation.where(token: recieved_token).pluck(:coordinates)[0]
+        if user_id_created != user_id_accepted && (Time.now - created_at) < 60
+            Friendship.create(:user_id => user_id_created, :friend_id => user_id_accepted, :gps_coordinates => coordinates)
+            render :json => {'estado': "ok"}
+        else 
+            render :json => {'estado': "error"} 
+        end
+        
+    end
 end
