@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :api_keys, path: 'api-keys', only: %i[index create destroy]
       post 'friendship_tokens/show', to: 'friendship_tokens#show', as: 'show'
       post 'friendship_tokens/add', to: 'friendship_tokens#add', as: 'add'
-      get 'users/busqueda', to: 'users#busqueda', as: 'busqueda'
+      post 'users/busqueda', to: 'users#busqueda', as: 'busqueda'
      
       resources :trip_destinations
      
