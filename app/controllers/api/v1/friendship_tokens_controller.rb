@@ -49,7 +49,7 @@ class API::V1::FriendshipTokensController < APIController
         print(pa)
         print("AAAAAAAAAAAAAA")
         user_id_accepted = pa['user_id'].to_i
-        recieved_token = pa['fndtk']
+        recieved_token = pa['token']
         print("ZZZZZZZZZZZZZZZZZZZZZZZZZ")
         print(recieved_token, user_id_accepted)
         print("ZZZZZZZZZZZZZZZZZZZZZZZZZ")
