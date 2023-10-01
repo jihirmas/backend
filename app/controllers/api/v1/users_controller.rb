@@ -8,6 +8,15 @@ class API::V1::UsersController < APIController
     render json: @users
   end
 
+  def busqueda
+    pa = JSON.parse(request.raw_post)
+    id_usuario = pa['user_id'].to_i
+    user_encontrado = User.find(id_usuario)
+    nombre = user_encontrado.pluck(:first_name)[0]
+    mail = user_encontrado.pluck(:email)[0]
+    render :json => {'nombre': nombre, 'mail': mail}
+  end
+
   # GET /users/1 or /users/1.json
   def show
     render json: @user
