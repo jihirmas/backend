@@ -44,15 +44,19 @@ class API::V1::FriendshipTokensController < APIController
 
     def add
         print("hola")
-        
         pa = JSON.parse(request.raw_post)
+        print("AAAAAAAAAAAAAA")
         print(pa)
+        print("AAAAAAAAAAAAAA")
         user_id_accepted = pa['user_id'].to_i
         recieved_token = pa['fndtk']
+        print("ZZZZZZZZZZZZZZZZZZZZZZZZZ")
         print(recieved_token, user_id_accepted)
+        print("ZZZZZZZZZZZZZZZZZZZZZZZZZ")
         user_id_created = Invitation.where(token: recieved_token).pluck(:user_id)[0].to_i
         created_at = Invitation.where(token: recieved_token).pluck(:created_at)[0]
         coordinates = Invitation.where(token: recieved_token).pluck(:coordinates)[0]
+        print("LLEGOOO")
         if user_id_created != user_id_accepted && (Time.now - created_at) < 60
             Friendship.create(:user_id => user_id_created, :friend_id => user_id_accepted, :gps_coordinates => coordinates)
             render :json => {'estado': "ok"}
