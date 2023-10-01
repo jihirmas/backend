@@ -2,6 +2,7 @@ class API::V1::FriendshipTokensController < APIController
    
 
     def show
+        print("hola show")
         token = SecureRandom.hex(32)
         
         
