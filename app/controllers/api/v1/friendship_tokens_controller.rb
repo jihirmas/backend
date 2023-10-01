@@ -42,9 +42,13 @@ class API::V1::FriendshipTokensController < APIController
     end
 
     def add
+        print("hola")
+        
         pa = JSON.parse(request.raw_post)
+        print(pa)
         user_id_accepted = pa['user_id'].to_i
         recieved_token = pa['fndtk']
+        print(recieved_token, user_id_accepted)
         user_id_created = Invitation.where(token: recieved_token).pluck(:user_id)[0].to_i
         created_at = Invitation.where(token: recieved_token).pluck(:created_at)[0]
         coordinates = Invitation.where(token: recieved_token).pluck(:coordinates)[0]
