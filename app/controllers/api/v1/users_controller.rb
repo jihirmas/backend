@@ -25,7 +25,6 @@ class API::V1::UsersController < APIController
   end
 
   def cambiar_avatar
-    print(params)
     @user = User.find(params[:id])
     @user.avatar.attach(params[:avatar])
 

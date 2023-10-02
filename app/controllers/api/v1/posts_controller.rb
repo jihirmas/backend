@@ -2,6 +2,23 @@ class API::V1::PostsController < APIController
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :authenticate_with_api_key!
 
+  def imagenes
+    pa = JSON.parse(request.raw_post)
+    post_id = pa['post_id'].to_i
+    post = Post.find(post_id)
+    imagenes = post.files
+    imagenes_array = imagenes.map do |imagen|
+      { img: url_for(imagen) }
+    end
+  
+    render json: imagenes_array
+  end
+
+  def cargar
+    @post = Post.find(params[:id])
+    @post.files.attach(params[:files])
+
+  end
 
   def new
     @post = Post.new
