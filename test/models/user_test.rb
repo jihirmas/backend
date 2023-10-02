@@ -10,6 +10,7 @@
 #  last_name       :string
 #  password_digest :string           not null
 #  phone           :string
+#  raw             :text
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

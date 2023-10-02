@@ -12,9 +12,23 @@ class API::V1::UsersController < APIController
     pa = JSON.parse(request.raw_post)
     id_usuario = pa['user_id'].to_i
     user_encontrado = User.find(id_usuario)
-    nombre = user_encontrado.pluck(:first_name)[0]
-    mail = user_encontrado.pluck(:email)[0]
-    render :json => {'nombre': nombre, 'mail': mail}
+    nombre = user_encontrado.first_name + " " + user_encontrado.last_name
+    mail = user_encontrado.email
+    #avatar = user_encontrado.raw #text
+    avatar = user_encontrado.avatar
+    if avatar.attached?
+      avatar_url = url_for(avatar)
+    else
+      avatar_url = ""
+    end
+    render :json => {'nombre': nombre, 'mail': mail, 'avatar': avatar_url}
+  end
+
+  def cambiar_avatar
+    print(params)
+    @user = User.find(params[:id])
+    @user.avatar.attach(params[:avatar])
+
   end
 
   # GET /users/1 or /users/1.json

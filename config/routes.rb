@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       post 'friendship_tokens/show', to: 'friendship_tokens#show', as: 'show'
       post 'friendship_tokens/add', to: 'friendship_tokens#add', as: 'add'
       post 'users/busqueda', to: 'users#busqueda', as: 'busqueda'
-     
+      post 'users/cambiar_avatar', to: 'users#cambiar_avatar', as: 'cambiar_avatar'
       resources :trip_destinations
      
 
